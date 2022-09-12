@@ -4,5 +4,5 @@ export const scheduleData = {
   client: '',
   status: '',
   value: '',
-  date: '',
-};
+  date: ''
+}

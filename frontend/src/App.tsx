@@ -10,6 +10,11 @@ const App: React.FC = () => {
     navigate('/login')
   }
 
+  const onLogout = (): void => {
+    localStorage.clear()
+    navigate('/login')
+  }
+
   const onCreateAccount = (): void => {
     navigate('/register')
   }
@@ -19,6 +24,7 @@ const App: React.FC = () => {
       <Header
         onLogin={ onLogin }
         onCreateAccount={ onCreateAccount }
+        onLogout={ onLogout }
       />
       <PathRouter />
     </>

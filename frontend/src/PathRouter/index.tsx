@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 import LoginForm from '../components/LoginForm/LoginForm'
 import RegisterForm from '../components/RegisterForm/RegisterForm'
+import Home from '../pages/Home/Home'
 
 const noop = (): void => {}
 
@@ -31,6 +32,7 @@ const PathRouter: React.FC = () => {
         onSubmit={ noop }
         verifyPassword={ true }
       /> } />
+      <Route path="/home" element={ <Home /> } />
     </Routes>
   )
 }

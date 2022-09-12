@@ -8,7 +8,7 @@ const initialState: TableState = {
 }
 
 export const TableSlice = createSlice({
-  name: 'AsideSlice',
+  name: 'TableSlice',
   initialState,
   reducers: {
     insertDataInSchedule: (state, action: PayloadAction<ITable>) => {

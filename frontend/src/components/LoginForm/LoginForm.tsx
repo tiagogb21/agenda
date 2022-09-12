@@ -162,7 +162,7 @@ const LoginForm: React.FC<IPropsLogin> = (props) => {
         />
         {
           verifyLogin && <p style={ loginFormStyles.verify }>
-            Email ou senha inválido.
+            Email ou senha inválidos.
           </p>
         }
         <article style={ loginFormStyles.linkBox }>
