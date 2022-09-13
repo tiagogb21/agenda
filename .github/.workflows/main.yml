@@ -1,0 +1,67 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test_back:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - name: Run integration tests
+        run: npm run test
+    env:
+      JWT_SECRET: ${{secrets.JWT_SECRET}}
+  
+  deploy_back:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    needs: test_back
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and Deploy API
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "schedule_calculator"
+          heroku_email: "tgbmateriais@gmail.com"
+          usedocker: true
+          stack: container
+          appdir: "backend"
+    env:
+      HD_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      HD_DB_CONNECTION_URI: ${{ secrets.DB_CONNECTION_URI }}
+
+  deploy_front:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    needs: deploy_back
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and Deploy Web App
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "schedule_calculator"
+          heroku_email: "tgbmateriais@gmail.com"
+          usedocker: true
+          stack: container
+          appdir: "frontend"
+          docker_build_args: |
+            REACT_APP_SERVER
+    env:
+      REACT_APP_SERVER: ${{ secrets.REACT_APP_SERVER }}

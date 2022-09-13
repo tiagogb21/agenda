@@ -1,0 +1,23 @@
+{
+  "name": "sm-sche",
+  "version": "1.0.0",
+  "description": "desafio softeo",
+  "main": "index.js",
+  "scripts": {
+    "install:front": "cd front-end && npm install",
+    "install:back": "cd back-end && npm install",
+    "install:apps": "npm run install:front && npm run install:back",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagogb21/agenda.git"
+  },
+  "keywords": [],
+  "author": "tiago garbi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiagogb21/agenda/issues"
+  },
+  "homepage": "https://github.com/tiagogb21/agenda#readme"
+}
