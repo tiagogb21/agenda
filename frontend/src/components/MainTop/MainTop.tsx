@@ -14,6 +14,9 @@ import { cleanSchedules, insertDataInSchedule } from '../../redux/reducers/table
 import { getAxiosClient, postAxiosInfoDataTable } from '../../services/axios/api'
 import IClientRegister from '../../interfaces/clientregister.interface'
 import SelectOption from '../../stories/SelectOption/SelectOption'
+import { BsCalendar3, BsFillCalculatorFill } from 'react-icons/bs'
+import Calculator from '../Calculator/Calculator'
+import { toggleButton } from '../../redux/reducers/calculatorReducer'
 
 const MainTop: React.FC = () => {
   const [mainTopScheduleData, setMainTopScheduleData] = useState(mainTopInitialState)
@@ -27,6 +30,7 @@ const MainTop: React.FC = () => {
   const navigate = useNavigate()
 
   const { schedules } = useAppSelector((state) => state.table)
+  const { buttonClose } = useAppSelector((state) => state.calculator)
 
   const dispatch = useAppDispatch()
 
@@ -96,6 +100,10 @@ const MainTop: React.FC = () => {
     navigate('/schedule')
   }
 
+  const handleClickCalculator = async (): Promise<void> => {
+    dispatch(toggleButton(!buttonClose))
+  }
+
   return (
     <section style={{ display: 'flex', justifyContent: 'center' }}>
       <Formik
@@ -108,6 +116,43 @@ const MainTop: React.FC = () => {
           >
             <article style={ verifyMediaSizeTitleBox() }>
               <h3 style={{ color: '#1ea7fd', fontSize: '25px' }}>Atendimento</h3>
+              <article style={{
+                width: '30%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-around'
+              }}>
+                <button
+                  type="button"
+                  style={{
+                    height: '35px',
+                    width: '35px',
+                    border: 'none',
+                    borderRadius: '50%',
+                    background: '#1ea7fd',
+                    cursor: 'pointer',
+                    color: '#ffffff'
+                  }}
+                >
+                  <BsCalendar3 />
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    height: '35px',
+                    width: '35px',
+                    border: 'none',
+                    borderRadius: '50%',
+                    background: '#1ea7fd',
+                    cursor: 'pointer',
+                    color: '#ffffff'
+                  }}
+                  onClick={ handleClickCalculator }
+                >
+                  <BsFillCalculatorFill />
+                </button>
+              </article>
               <Button
                 primary
                 label="CONCLUIR"
@@ -160,6 +205,9 @@ const MainTop: React.FC = () => {
             </article>
           </Form>
         </Formik>
+        {
+          buttonClose && <Calculator />
+        }
     </section>
   )
 }

@@ -1,4 +1,5 @@
 export interface ICalendar {
-  monthIndex: number
-  setMonthIndex: any
-}
+  firstDayOfMonth: string
+  actualMonth: number
+  actualYear: number
+};

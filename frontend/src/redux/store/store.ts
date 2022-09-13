@@ -6,22 +6,16 @@ import scheduleRegister from '../reducers/registerReducers'
 import scheduleAside from '../reducers/asideReducers'
 import scheduleTable from '../reducers/tableReducers'
 import scheduleCalendar from '../reducers/calendarReducer'
-import scheduleEventModal from '../reducers/eventModal'
-import scheduleDay from '../reducers/dayReducer'
-import scheduleLabels from '../reducers/labelReducer'
-import scheduleSmallCallendarMonth from '../reducers/smallCallendarMonthReducer'
+import scheduleCalculator from '../reducers/calculatorReducer'
 
 export const store = configureStore({
   reducer: {
     aside: scheduleAside,
     calendar: scheduleCalendar,
-    day: scheduleDay,
-    eventModal: scheduleEventModal,
-    labels: scheduleLabels,
     login: scheduleLogin,
     register: scheduleRegister,
-    smallCallendarMonth: scheduleSmallCallendarMonth,
-    table: scheduleTable
+    table: scheduleTable,
+    calculator: scheduleCalculator
   }
 })
 

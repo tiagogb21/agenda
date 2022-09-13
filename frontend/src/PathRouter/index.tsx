@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 import LoginForm from '../components/LoginForm/LoginForm'
 import RegisterForm from '../components/RegisterForm/RegisterForm'
+import Calendar from '../pages/Calendar/Calendar'
 import Home from '../pages/Home/Home'
 
 const noop = (): void => {}
@@ -33,6 +34,7 @@ const PathRouter: React.FC = () => {
         verifyPassword={ true }
       /> } />
       <Route path="/home" element={ <Home /> } />
+      <Route path="/calendar" element={ <Calendar /> } />
     </Routes>
   )
 }

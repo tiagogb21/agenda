@@ -3,8 +3,9 @@ import dayjs from 'dayjs'
 import { ICalendar } from '../../interfaces/calendar.interface'
 
 const initialState: ICalendar = {
-  monthIndex: 0,
-  setMonthIndex: {}
+  firstDayOfMonth: dayjs().startOf('month').toString(),
+  actualMonth: dayjs().month(),
+  actualYear: dayjs().year()
 }
 
 export const calendarSlice = createSlice({
@@ -12,15 +13,21 @@ export const calendarSlice = createSlice({
   initialState,
   reducers: {
     includeMonthIndex: (state) => {
-      state.monthIndex += 1
+      if (state.actualMonth > 12) {
+        state.actualMonth = 1
+        state.actualYear = +state.actualYear + 1
+      }
+      state.actualMonth = +state.actualYear + 1
     },
     reduceMonthIndex: (state) => {
-      state.monthIndex -= 1
+      if (state.actualMonth < 1) {
+        state.actualMonth = 12
+        state.actualYear -= 1
+      }
+      state.actualMonth -= 1
     },
     resetMonthIndex: (state) => {
-      state.monthIndex = state.monthIndex === dayjs().month()
-        ? state.monthIndex + Math.random()
-        : dayjs().month()
+      state.actualMonth = dayjs().month()
     }
   }
 })
