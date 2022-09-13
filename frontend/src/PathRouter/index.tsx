@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 import LoginForm from '../components/LoginForm/LoginForm'
 import RegisterForm from '../components/RegisterForm/RegisterForm'
+import Admin from '../pages/Admin/Admin'
 import Calendar from '../pages/Calendar/Calendar'
 import Home from '../pages/Home/Home'
 import Page404 from '../pages/Page404/Page404'
@@ -18,8 +19,10 @@ const PathRouter: React.FC = () => {
     const getUserFromLocal = localStorage.getItem('user')
     if (getUserFromLocal == null) return
     const { name } = JSON.parse(getUserFromLocal)
-    setUser(name)
+    setUser(name.toLowerCase())
   }, [])
+
+  console.log(user)
 
   return (
     <Routes>
@@ -43,19 +46,10 @@ const PathRouter: React.FC = () => {
         onSubmit={ noop }
         verifyPassword={ true }
       /> } />
-      {
-        (user === 'admin' || user === 'user') &&
-        <>
-          <Route path="/home" element={ <Home /> } />
-          <Route path="/calendar" element={ <Calendar /> } />
-        </>
-      }
-      {
-        (user === 'client') &&
-        <>
-          <Route path="/client" element={ <Home /> } />
-        </>
-      }
+      <Route path="/home" element={ <Home /> } />
+      <Route path="/calendar" element={ <Calendar /> } />
+      <Route path="/client" element={ <Home /> } />
+      <Route path="/admin" element={ <Admin /> } />
       <Route path="*" element={ <Page404 /> } />
     </Routes>
   )

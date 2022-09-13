@@ -9,6 +9,7 @@ export interface ITable {
 
 export interface TableState {
   schedules: ITable[]
+  total: number
 }
 
 export interface TableAction {

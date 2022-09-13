@@ -10,7 +10,10 @@ import Button from '../../stories/Button/Button'
 import TextInput from '../../stories/TextInput/TextInput'
 import mainTopStyles from './MainTop.styles'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks'
-import { cleanSchedules, insertDataInSchedule } from '../../redux/reducers/tableReducers'
+import {
+  /* cleanSchedules, */
+  insertDataInSchedule
+} from '../../redux/reducers/tableReducers'
 import { getAxiosClient, postAxiosInfoDataTable } from '../../services/axios/api'
 import IClientRegister from '../../interfaces/clientregister.interface'
 import SelectOption from '../../stories/SelectOption/SelectOption'
@@ -90,14 +93,14 @@ const MainTop: React.FC = () => {
       date: formatedDate()
     }
     const postAxios = await postAxiosInfoDataTable(data)
-    if ((Boolean((postAxios?.message.includes('400')))) ||
-    (Boolean((postAxios?.message.includes('401'))))) return
+    if ((Boolean((postAxios?.message?.includes('400')))) ||
+    (Boolean((postAxios?.message?.includes('401'))))) return
     dispatch(insertDataInSchedule({ id: schedules.length, ...data }))
   }
 
   const handleClickConclude = async (): Promise<void> => {
-    dispatch(cleanSchedules())
-    navigate('/schedule')
+    // dispatch(cleanSchedules())
+    navigate('/admin')
   }
 
   const handleClickCalculator = async (): Promise<void> => {

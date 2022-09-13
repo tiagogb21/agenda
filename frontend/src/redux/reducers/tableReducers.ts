@@ -4,7 +4,8 @@ import { ITable, TableState } from '../../interfaces/table.interface'
 import { scheduleData } from '../../utils/data'
 
 const initialState: TableState = {
-  schedules: [scheduleData]
+  schedules: [scheduleData],
+  total: 0
 }
 
 export const TableSlice = createSlice({
@@ -21,6 +22,9 @@ export const TableSlice = createSlice({
     },
     cleanSchedules: (state) => {
       state.schedules = []
+    },
+    sumAll: (state) => {
+      state.total = state.schedules.reduce((acc, curr) => acc + Number(curr.value), 0)
     }
   }
 })
@@ -28,6 +32,7 @@ export const TableSlice = createSlice({
 export const {
   insertDataInSchedule,
   removeDataFromSchedule,
-  cleanSchedules
+  cleanSchedules,
+  sumAll
 } = TableSlice.actions
 export default TableSlice.reducer
